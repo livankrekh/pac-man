@@ -23,7 +23,9 @@ int		main(int argc, char **argv)
 	char							buff[2048];
 	char							**tmp;
 	int								size_y;
+	int								gh;
 
+	gh = 0;
 	if (argc == 1)
 	{
 		map.reserve(20);
@@ -70,8 +72,12 @@ int		main(int argc, char **argv)
 	for (int k = 0; k < (int)map.size(); k++)
 	{
 		for (int l = 0; l < (int)map[k].size(); l++)
+		{
+			if (map[k][l] == 3)
+				gh++;
 			std::cout << map[k][l] << " ";
+		}
 		std::cout << std::endl;
 	}
-	vizualize(map);
+	vizualize(map, gh);
 }

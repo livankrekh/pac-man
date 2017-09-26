@@ -1,24 +1,26 @@
 #include "pac.hpp"
 
-void	vizualize(std::vector<std::vector<int> > map)
+void	vizualize(std::vector<std::vector<int> > map, int gh)
 {
-	Pac 	*pacman = new Pac(map);
-	Ghost	*ghosts;
-	int		gh;
+	Pac 				*pacman = new Pac(map);
+	std::vector<Ghost>	ghosts;
+	std::thread	pac_thread;
+	std::thread	ghosts_thread;
 
 	gh = 0;
-	for (int i = 0; i < map.size(); i++)
+	ghosts.reserve(gh);
+	for (int i = 0; i < (int)map.size(); i++)
 	{
-		for (int j = 0; j < map[i].size(); j++)
+		for (int j = 0; j < (int)map[i].size(); j++)
 			if (map[i][j] == 3)
 				gh++;
-	}
-	ghosts = new Ghost[gh + 1];
+	};
 	gh = 0;
-	for (i = 0; i < map.size(); i++)
+	for (int i = 0; i < (int)map.size(); i++)
 	{
-		for (int j = 0; j < map[i].size(); j++)
+		for (int j = 0; j < (int)map[i].size(); j++)
 			if (map[i][j] == 3)
-				ghosts[gh] = new Ghost(j, i, gh++);
+				ghosts.push_back(Ghost(j, i, gh++));
 	}
+	delete pacman;
 }

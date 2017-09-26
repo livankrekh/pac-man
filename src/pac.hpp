@@ -16,8 +16,8 @@ public:
 	int		points;
 
 	Pac(std::vector<std::vector<int> > map);
-	go(std::vector<std::vector<int> > map, char flag);
 	~Pac();
+	void	go_away(std::vector<std::vector<int> > map, char flag);
 };
 
 class 			Ghost
@@ -25,6 +25,7 @@ class 			Ghost
 public:
 	int		x;
 	int		y;
+	int		id;
 
 	Ghost(int x0, int y0, int ide);
 	~Ghost();
@@ -32,6 +33,7 @@ public:
 
 char			**ft_strsplit(char const *s, char c);
 void			delete_split(char **split);
-int				split_size(char **split);	
+int				split_size(char **split);
+void			vizualize(std::vector<std::vector<int> > map, int gh);	
 
 #endif

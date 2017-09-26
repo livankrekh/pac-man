@@ -1,21 +1,13 @@
 #include "pac.hpp"
 
-class 			Ghost
+Ghost::Ghost(int x0, int y0, int ide)
 {
-public:
-	int		x;
-	int		y;
-	int		id;
+	this->x = x0;
+	this->y = y0;
+	this->id = ide;
+}
 
-	void	Ghost(int x0, int y0, int ide)
-	{
-		this->x = x0;
-		this->y = y0;
-		this->id = ide;
-	}
-
-	void	~Ghost()
-	{
-		std::cout << "Ghost #" << this->id << " is dead :)" << endl;
-	}
-};
+Ghost::~Ghost()
+{
+	std::cout << "Ghost #" << this->id << " is dead :)" << std::endl;
+}
