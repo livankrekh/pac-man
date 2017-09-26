@@ -1,5 +1,4 @@
-#include <stdlib.h>
-#include <string.h>
+#include "pac.hpp"
 
 void			delete_split(char **split)
 {

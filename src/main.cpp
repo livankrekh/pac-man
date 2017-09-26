@@ -80,4 +80,6 @@ int		main(int argc, char **argv)
 		std::cout << std::endl;
 	}
 	vizualize(map, gh);
+
+	return (0);
 }
