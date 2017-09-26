@@ -1,0 +1,1 @@
+/usr/bin/c++   -O3 -DNDEBUG   CMakeFiles/window.dir/Window.cpp.o  -o window -rdynamic ../../lib/libsfml-window.so.2.4.2 ../../lib/libsfml-system.so.2.4.2 -lGLU -lGL -lpthread -lrt -lX11 -lXrandr -ludev -lGL -Wl,-rpath,/home/unit-hacker/pac-man/SFML-LINUX/lib: 

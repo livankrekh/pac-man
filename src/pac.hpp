@@ -36,6 +36,6 @@ public:
 char			**ft_strsplit(char const *s, char c);
 void			delete_split(char **split);
 int				split_size(char **split);
-void			vizualize(std::vector<std::vector<int> > map, int gh);	
+void			vizualize(std::vector<std::vector<int> > *map, int gh);	
 
 #endif

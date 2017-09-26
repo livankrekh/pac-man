@@ -80,7 +80,7 @@ if(SFML_OS_MACOSX)
     sfml_set_option(SFML_BUILD_FRAMEWORKS FALSE BOOL "TRUE to build SFML as frameworks libraries (release only), FALSE to build according to BUILD_SHARED_LIBS")
 
     # add an option to let the user specify a custom directory for frameworks installation (SFML, FLAC, ...)
-    sfml_set_option(CMAKE_INSTALL_FRAMEWORK_PREFIX "/Library/Frameworks" STRING "Frameworks installation directory")
+    sfml_set_option(CMAKE_INSTALL_FRAMEWORK_PREFIX "./lib" STRING "Frameworks installation directory")
 
     # add an option to automatically install Xcode templates
     sfml_set_option(SFML_INSTALL_XCODE_TEMPLATES FALSE BOOL "TRUE to automatically install the Xcode templates, FALSE to do nothing about it. The templates are compatible with Xcode 4 and 5.")

@@ -2,14 +2,10 @@ NAME1 = pac-man
 SYSTEM = LINUX
 CC = g++
 SRC = src/main.cpp src/ft_strsplit.cpp src/viz.cpp src/pac.cpp src/ghost.cpp
-FLAGS = -Wno-deprecated-declarations-g -std=c++11 -O3
-SFML_FLAGS = -lsfml-graphics -lsfml-window -lsfml-system
-
-ifeq ($(SYSTEM), LINUX)
-	INCLUDE_SFML = -I SFML-LINUX/include
-else
-	INCLUDE_SFML = -I SFML-OSX/include
-endif
+FLAGS = -g -std=c++11 -O3 -fno-strict-aliasing
+SFML_FLAGS = -lsfml-graphics -lsfml-window -lsfml-system 
+INCLUDE_SFML = -I SFML/include
+SFML = -L SFML/lib
 
 .PHONY: all re clean fclean
 
@@ -19,7 +15,7 @@ $(NAME1): $(SRC:.cpp=.o)
 	$(CC) -o $(NAME1) $(SRC:.cpp=.o) $(FLAGS) $(SFML_FLAGS)
 
 %.o: %.cpp
-	$(CC) -o $@ -c $< $(FLAGS) $(INCLUDE_SFML)
+	$(CC) -o $@ -c $< $(FLAGS)
 
 clean:
 	rm -f $(SRC:.cpp=.o)

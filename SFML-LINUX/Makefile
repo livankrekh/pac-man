@@ -70,7 +70,7 @@ install/fast: preinstall/fast
 
 # Special rule for the target list_install_components
 list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\" \"bin\" \"devel\""
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\" \"bin\" \"devel\" \"examples\""
 .PHONY : list_install_components
 
 # Special rule for the target list_install_components
@@ -219,6 +219,136 @@ sfml-audio/fast:
 	$(MAKE) -f src/SFML/Audio/CMakeFiles/sfml-audio.dir/build.make src/SFML/Audio/CMakeFiles/sfml-audio.dir/build
 .PHONY : sfml-audio/fast
 
+#=============================================================================
+# Target rules for targets named ftp
+
+# Build rule for target.
+ftp: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ftp
+.PHONY : ftp
+
+# fast build rule for target.
+ftp/fast:
+	$(MAKE) -f examples/ftp/CMakeFiles/ftp.dir/build.make examples/ftp/CMakeFiles/ftp.dir/build
+.PHONY : ftp/fast
+
+#=============================================================================
+# Target rules for targets named opengl
+
+# Build rule for target.
+opengl: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 opengl
+.PHONY : opengl
+
+# fast build rule for target.
+opengl/fast:
+	$(MAKE) -f examples/opengl/CMakeFiles/opengl.dir/build.make examples/opengl/CMakeFiles/opengl.dir/build
+.PHONY : opengl/fast
+
+#=============================================================================
+# Target rules for targets named pong
+
+# Build rule for target.
+pong: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 pong
+.PHONY : pong
+
+# fast build rule for target.
+pong/fast:
+	$(MAKE) -f examples/pong/CMakeFiles/pong.dir/build.make examples/pong/CMakeFiles/pong.dir/build
+.PHONY : pong/fast
+
+#=============================================================================
+# Target rules for targets named shader
+
+# Build rule for target.
+shader: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 shader
+.PHONY : shader
+
+# fast build rule for target.
+shader/fast:
+	$(MAKE) -f examples/shader/CMakeFiles/shader.dir/build.make examples/shader/CMakeFiles/shader.dir/build
+.PHONY : shader/fast
+
+#=============================================================================
+# Target rules for targets named sockets
+
+# Build rule for target.
+sockets: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 sockets
+.PHONY : sockets
+
+# fast build rule for target.
+sockets/fast:
+	$(MAKE) -f examples/sockets/CMakeFiles/sockets.dir/build.make examples/sockets/CMakeFiles/sockets.dir/build
+.PHONY : sockets/fast
+
+#=============================================================================
+# Target rules for targets named sound
+
+# Build rule for target.
+sound: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 sound
+.PHONY : sound
+
+# fast build rule for target.
+sound/fast:
+	$(MAKE) -f examples/sound/CMakeFiles/sound.dir/build.make examples/sound/CMakeFiles/sound.dir/build
+.PHONY : sound/fast
+
+#=============================================================================
+# Target rules for targets named sound-capture
+
+# Build rule for target.
+sound-capture: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 sound-capture
+.PHONY : sound-capture
+
+# fast build rule for target.
+sound-capture/fast:
+	$(MAKE) -f examples/sound_capture/CMakeFiles/sound-capture.dir/build.make examples/sound_capture/CMakeFiles/sound-capture.dir/build
+.PHONY : sound-capture/fast
+
+#=============================================================================
+# Target rules for targets named voip
+
+# Build rule for target.
+voip: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 voip
+.PHONY : voip
+
+# fast build rule for target.
+voip/fast:
+	$(MAKE) -f examples/voip/CMakeFiles/voip.dir/build.make examples/voip/CMakeFiles/voip.dir/build
+.PHONY : voip/fast
+
+#=============================================================================
+# Target rules for targets named window
+
+# Build rule for target.
+window: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 window
+.PHONY : window
+
+# fast build rule for target.
+window/fast:
+	$(MAKE) -f examples/window/CMakeFiles/window.dir/build.make examples/window/CMakeFiles/window.dir/build
+.PHONY : window/fast
+
+#=============================================================================
+# Target rules for targets named X11
+
+# Build rule for target.
+X11: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 X11
+.PHONY : X11
+
+# fast build rule for target.
+X11/fast:
+	$(MAKE) -f examples/X11/CMakeFiles/X11.dir/build.make examples/X11/CMakeFiles/X11.dir/build
+.PHONY : X11/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -236,6 +366,16 @@ help:
 	@echo "... sfml-network"
 	@echo "... sfml-graphics"
 	@echo "... sfml-audio"
+	@echo "... ftp"
+	@echo "... opengl"
+	@echo "... pong"
+	@echo "... shader"
+	@echo "... sockets"
+	@echo "... sound"
+	@echo "... sound-capture"
+	@echo "... voip"
+	@echo "... window"
+	@echo "... X11"
 .PHONY : help
 
 

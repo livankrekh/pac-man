@@ -79,7 +79,9 @@ int		main(int argc, char **argv)
 		}
 		std::cout << std::endl;
 	}
-	vizualize(map, gh);
+	// for (int i = 0; env[i] != NULL; i++)
+	// 	printf("%s\n", env[i]);
+	vizualize(&map, gh);
 
 	return (0);
 }

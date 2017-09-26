@@ -219,8 +219,11 @@ SFML_BINARY_DIR:STATIC=/home/unit-hacker/pac-man/SFML-LINUX
 //TRUE to generate the API documentation, FALSE to ignore it
 SFML_BUILD_DOC:BOOL=FALSE
 
+//No help, variable specified on the command line.
+SFML_BUILD_DOCS:UNINITIALIZED=ON
+
 //TRUE to build the SFML examples, FALSE to ignore them
-SFML_BUILD_EXAMPLES:BOOL=FALSE
+SFML_BUILD_EXAMPLES:BOOL=ON
 
 //TRUE to automatically install pkg-config files so other projects
 // can find SFML
@@ -438,7 +441,7 @@ X11_xf86vmode_INCLUDE_PATH:PATH=/usr/include
 sfml-audio_LIB_DEPENDS:STATIC=general;sfml-system;general;/usr/lib/x86_64-linux-gnu/libopenal.so;general;/usr/lib/x86_64-linux-gnu/libvorbisenc.so;general;/usr/lib/x86_64-linux-gnu/libvorbisfile.so;general;/usr/lib/x86_64-linux-gnu/libvorbis.so;general;/usr/lib/x86_64-linux-gnu/libogg.so;general;/usr/lib/x86_64-linux-gnu/libFLAC.so;
 
 //Dependencies for the target
-sfml-graphics_LIB_DEPENDS:STATIC=general;sfml-window;general;sfml-system;general;/usr/lib/x86_64-linux-gnu/libGL.so;general;/usr/lib/x86_64-linux-gnu/libSM.so;general;/usr/lib/x86_64-linux-gnu/libICE.so;general;/usr/lib/x86_64-linux-gnu/libX11.so;general;/usr/lib/x86_64-linux-gnu/libXext.so;general;/usr/lib/x86_64-linux-gnu/libfreetype.so;general;/usr/lib/x86_64-linux-gnu/libjpeg.so;
+sfml-graphics_LIB_DEPENDS:STATIC=general;sfml-window;general;sfml-system;general;/usr/lib/x86_64-linux-gnu/libGL.so;general;/usr/lib/x86_64-linux-gnu/libSM.so;general;/usr/lib/x86_64-linux-gnu/libICE.so;general;/usr/lib/x86_64-linux-gnu/libX11.so;general;/usr/lib/x86_64-linux-gnu/libXext.so;general;/usr/lib/x86_64-linux-gnu/libfreetype.so;general;/usr/lib/x86_64-linux-gnu/libjpeg.so;general;-lgcc_s -lgcc;general;-lgcc_s -lgcc;
 
 //Dependencies for the target
 sfml-network_LIB_DEPENDS:STATIC=general;sfml-system;
@@ -550,7 +553,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=7
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=18
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
