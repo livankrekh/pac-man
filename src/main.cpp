@@ -37,6 +37,8 @@ int		main(int argc, char **argv)
 			{
 				if (i == 0 && j == 0)
 					map[i].push_back(2);
+				else if (i >= 9 && i <= 11 && j >= 9 && j <= 11)
+					map[i].push_back(0);
 				else if (i == 0 && j == 19)
 					map[i].push_back(3);
 				else if (i == 19 && j == 0)

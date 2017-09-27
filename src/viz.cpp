@@ -1,11 +1,46 @@
 #include "pac.hpp"
 
+int 	get_w(std::vector<std::vector<int> > *map)
+{
+	int 	w;
+
+	w = 0;
+	for (int i = 0; i < map->size(); i++)
+		if (w < (*map)[i].size())
+			w = (*map)[i].size();
+	return (740 / w);
+}
+
+void	draw_pacman(std::vector<std::vector<int> > *map, Pac *pacman, sf::Sprite *pacman_sprite)
+{
+	float		sec;
+	float		current;
+	sf::Clock 	clockS;
+
+	sec = clockS.getElapsedTime().asMicroseconds();
+	clockS.restart();
+	sec = sec / 800;
+	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || (sf::Keyboard::isKeyPressed(sf::Keyboard::D))))
+	{
+		current += 0.005 * sec;
+		if (current > 2)
+			current -= 2;
+		pacman_sprite->setTextureRect(sf::IntRect(320 + (32 * (int)current), 0, 32, 32));
+		pacman_sprite->move(0.1 * sec, 0);
+	}
+}
+
 void	draw_map(std::vector<std::vector<int> > *map, sf::RenderWindow *window)
 {
 	sf::Texture			wall_tmp;
 	sf::Texture 		wall_back_tmp;
 	sf::Sprite			wall_back;
 	sf::Sprite			wall;
+	sf::Image			ptr;
+	sf::Texture 		ptr_tmp;
+	sf::Sprite 			point;
+	// sf::Texture 		ground_tmp;
+	// sf::Sprite 			ground;
 	int					w;
 	int					h;
 	int					x;
@@ -13,9 +48,13 @@ void	draw_map(std::vector<std::vector<int> > *map, sf::RenderWindow *window)
 
 	y = 30;
 	h = 540 / map->size();
-	w = 0;
+	w = get_w(map);
+	ptr.loadFromFile("/home/unit-hacker/pac-man/src/img/point.bmp");
+	ptr.createMaskFromColor(sf::Color(255, 0, 255));
+	ptr_tmp.loadFromImage(ptr);
 	wall_tmp.loadFromFile("/home/unit-hacker/pac-man/src/img/wall.png");
 	wall_back_tmp.loadFromFile("/home/unit-hacker/pac-man/src/img/wall_back.jpg");
+	// ground_tmp.loadFromFile("/home/unit-hacker/pac-man/src/img/ground.gif");
 	for (int i = 0; i < 600; i += 30)
 	{
 		for (int j = 0; j < 800; j += 30)
@@ -29,10 +68,6 @@ void	draw_map(std::vector<std::vector<int> > *map, sf::RenderWindow *window)
 			}
 		}
 	}
-	for (int i = 0; i < map->size(); i++)
-		if (w < (*map)[i].size())
-			w = (*map)[i].size();
-	w = 740 / w;
 	for (int i = 0; i < map->size(); i++)
 	{
 		wall_back.setTexture(wall_back_tmp);
@@ -49,6 +84,21 @@ void	draw_map(std::vector<std::vector<int> > *map, sf::RenderWindow *window)
 				wall.setPosition(x, y);
 				window->draw(wall);
 			}
+			else if ((*map)[i][j] == 5)
+			{
+				point.setTexture(ptr_tmp);
+				point.setScale((float)w / 32.0, (float)h / 32.0);
+				point.setPosition(x, y);
+				window->draw(point);
+			}
+			// else
+			// {
+			// 	ground.setTexture(ground_tmp);
+			// 	ground.setTextureRect(sf::IntRect(0, 0, 32, 32));
+			// 	ground.setScale((float)w / 32.0, (float)h / 32.0);
+			// 	ground.setPosition(x, y);
+			// 	window->draw(ground);
+			// }
 			x += w;
 		}
 		y += h;
@@ -58,12 +108,19 @@ void	draw_map(std::vector<std::vector<int> > *map, sf::RenderWindow *window)
 void	go_viz(std::vector<std::vector<int> > *map, Pac *pacman, std::vector<Ghost*> ghosts)
 {
 	sf::RenderWindow	window(sf::VideoMode(800, 600), "Pac-man");
-	sf::Texture			wall;
-	sf::Sprite			pac;
+	sf::Texture 		pac;
+	sf::Sprite			pacman_sprite;
+	sf::Font			font;
+	sf::Text 			score;
 
-	wall.loadFromFile("/home/unit-hacker/pac-man/src/img/all.png");
-	pac.setTexture(wall);
-	pac.setPosition(100, 100);
+	pac.loadFromFile("/home/unit-hacker/pac-man/src/img/all.png");
+	pacman_sprite.setTexture(pac);
+	pacman_sprite.setPosition(pacman->x * 32 + 30, pacman->y * 32 + 30);
+	pacman_sprite.setTextureRect(sf::IntRect(320, 0, 32, 32));
+	font.loadFromFile("/home/unit-hacker/pac-man/src/img/Comic_sans.ttf");
+	score = sf::Text("", font, 20);
+	score.setColor(sf::Color::Black);
+	score.setStyle(sf::Text::Bold | sf::Text::Underlined);
 	while(window.isOpen())
 	{
 		sf::Event event;
@@ -75,6 +132,11 @@ void	go_viz(std::vector<std::vector<int> > *map, Pac *pacman, std::vector<Ghost*
 		}
 		window.clear();
 		draw_map(map, &window);
+		draw_pacman(map, pacman, &pacman_sprite);
+		window.draw(pacman_sprite);
+		score.setString("Pac-mans points: " + std::to_string(pacman->points));
+		score.setPosition(30, 0);
+		window.draw(score);
         window.display();
     }
 }

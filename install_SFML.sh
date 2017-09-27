@@ -18,5 +18,6 @@ sudo apt-get install libx11-xcb1
 sudo apt-get install libx11-xcb-dev
 cd SFML-LINUX/
 cmake CMakeList.txt
+make all
 sudo make install
 cd ../
