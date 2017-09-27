@@ -11,22 +11,62 @@ int 	get_w(std::vector<std::vector<int> > *map)
 	return (740 / w);
 }
 
-void	draw_pacman(std::vector<std::vector<int> > *map, Pac *pacman, sf::Sprite *pacman_sprite)
+void	draw_pacman(std::vector<std::vector<int> > *map, Pac *pacman, sf::Sprite *pacman_sprite, sf::Clock & clockS, float & current)
 {
-	float		sec;
-	float		current;
-	sf::Clock 	clockS;
+	float			sec;
 
 	sec = clockS.getElapsedTime().asMicroseconds();
+	pacman_sprite->setScale((float)get_w(map) / 32.0, (float)(540 / map->size()) / 32.0);
 	clockS.restart();
 	sec = sec / 800;
-	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || (sf::Keyboard::isKeyPressed(sf::Keyboard::D))))
+	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || (sf::Keyboard::isKeyPressed(sf::Keyboard::D)))
+		&& (*map)[pacman->y][pacman->x + 1] != 0)
 	{
 		current += 0.005 * sec;
 		if (current > 2)
+		{
+			pacman->go_away(*map, 'r');
 			current -= 2;
+		}
 		pacman_sprite->setTextureRect(sf::IntRect(320 + (32 * (int)current), 0, 32, 32));
 		pacman_sprite->move(0.1 * sec, 0);
+	}
+	else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || (sf::Keyboard::isKeyPressed(sf::Keyboard::A)))
+		&& (*map)[pacman->y][pacman->x - 1] != 0)
+	{
+		current += 0.005 * sec;
+		if (current > 2)
+		{
+			pacman->go_away(*map, 'l');
+			current -= 2;
+		}
+		pacman_sprite->setTextureRect(sf::IntRect(320 + (32 * (int)current), 64, 32, 32));
+		pacman_sprite->move(-0.1 * sec, 0);
+	}
+	else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || (sf::Keyboard::isKeyPressed(sf::Keyboard::W)))
+		&& (*map)[pacman->y - 1][pacman->x] != 0)
+	{
+		current += 0.005 * sec;
+		if (current > 2)
+		{
+			pacman->go_away(*map, 'u');
+			current -= 2;
+		}
+		pacman_sprite->setTextureRect(sf::IntRect(320 + (32 * (int)current), 96, 32, 32));
+		pacman_sprite->move(0, -0.1 * sec);
+	}
+	else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Down) || (sf::Keyboard::isKeyPressed(sf::Keyboard::S)))
+		&& (*map)[pacman->y + 1][pacman->x] != 0)
+	{
+		current += 0.005 * sec;
+		if (current )
+		if (current > 2)
+		{
+			pacman->go_away(*map, 'd');
+			current -= 2;
+		}
+		pacman_sprite->setTextureRect(sf::IntRect(320 + (32 * (int)current), 32, 32, 32));
+		pacman_sprite->move(0, 0.1 * sec);
 	}
 }
 
@@ -112,7 +152,10 @@ void	go_viz(std::vector<std::vector<int> > *map, Pac *pacman, std::vector<Ghost*
 	sf::Sprite			pacman_sprite;
 	sf::Font			font;
 	sf::Text 			score;
+	float				current;
+	sf::Clock 			clockS;
 
+	current = 0;
 	pac.loadFromFile("/home/unit-hacker/pac-man/src/img/all.png");
 	pacman_sprite.setTexture(pac);
 	pacman_sprite.setPosition(pacman->x * 32 + 30, pacman->y * 32 + 30);
@@ -132,7 +175,7 @@ void	go_viz(std::vector<std::vector<int> > *map, Pac *pacman, std::vector<Ghost*
 		}
 		window.clear();
 		draw_map(map, &window);
-		draw_pacman(map, pacman, &pacman_sprite);
+		draw_pacman(map, pacman, &pacman_sprite, clockS, current);
 		window.draw(pacman_sprite);
 		score.setString("Pac-mans points: " + std::to_string(pacman->points));
 		score.setPosition(30, 0);

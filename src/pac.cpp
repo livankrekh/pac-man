@@ -22,11 +22,11 @@ Pac::Pac(std::vector<std::vector<int> > map)
 	}
 }
 
-void	Pac::go_away(std::vector<std::vector<int> > map, char flag)
+void	Pac::go_away(std::vector<std::vector<int> > & map, char flag)
 {
 	if (flag == 'r')
 	{
-		if (this->x < (int)map[this->y].size())
+		if (this->x < (int)map[this->y].size() && map[this->y][this->x + 1] != 0)
 		{
 			map[this->y][this->x] = 1;
 			this->x++;
@@ -34,7 +34,7 @@ void	Pac::go_away(std::vector<std::vector<int> > map, char flag)
 	}
 	else if (flag == 'l')
 	{
-		if (this->x > 0)
+		if (this->x > 0 && map[this->y][this->x - 1] != 0)
 		{
 			map[this->y][this->x] = 1;
 			this->x--;
@@ -42,7 +42,7 @@ void	Pac::go_away(std::vector<std::vector<int> > map, char flag)
 	}
 	else if (flag == 'u')
 	{
-		if (this->y > 0)
+		if (this->y > 0 && map[this->y - 1][this->x] != 0)
 		{
 			map[this->y][this->x] = 1;
 			this->y--;
@@ -50,10 +50,10 @@ void	Pac::go_away(std::vector<std::vector<int> > map, char flag)
 	}
 	else if (flag == 'd')
 	{
-		if (this->y < (int)map.size())
+		if (this->y < (int)map.size() && map[this->y + 1][this->x] != 0)
 		{
 			map[this->y][this->x] = 1;
-			this->y--;
+			this->y++;
 		}
 	}
 	if (map[this->y][this->x] == 5)

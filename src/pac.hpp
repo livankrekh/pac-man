@@ -7,6 +7,7 @@
 # include <stdlib.h>
 # include <vector>
 # include <thread>
+# include <SFML/System/Vector2.hpp>
 # include <SFML/Graphics.hpp>
 # include <SFML/Window.hpp>
 
@@ -19,7 +20,7 @@ public:
 
 	Pac(std::vector<std::vector<int> > map);
 	~Pac();
-	void	go_away(std::vector<std::vector<int> > map, char flag);
+	void	go_away(std::vector<std::vector<int> > & map, char flag);
 };
 
 class 			Ghost
