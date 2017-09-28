@@ -1,4 +1,4 @@
-#usr/bin!
+#!/bin/bash
 
 sudo apt-get install libpthread-stubs0-dev
 sudo apt-get install libgl1-mesa-dev
