@@ -30,6 +30,7 @@ public:
 	int		x;
 	int		y;
 	int		id;
+	int		prev;
 
 	Ghost(int x0, int y0, int ide);
 	~Ghost();

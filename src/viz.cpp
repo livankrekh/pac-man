@@ -11,6 +11,58 @@ int 	get_w(std::vector<std::vector<int> > *map)
 	return (740 / w);
 }
 
+void	going_gh(Ghost *ghost, std::vector<std::vector<int> > *map, sf::Sprite *gh_sprite)
+{
+	float	x_loc;
+	float	y_loc;
+	int 	w;
+	int 	h;
+	int 	new_x;
+	int 	new_y;
+
+	w = get_w(map);
+	h = 540 / map->size();
+	x_loc = gh_sprite->getPosition().x + (w / 2);
+	y_loc = gh_sprite->getPosition().y + (h / 2);
+	new_x = (x_loc - 30) / w;
+	new_y = (y_loc - 30) / h;
+	if ((*map)[new_y][new_x] == 2)
+	{
+		std::cout << "Pac-man dead! You lose!" << std::endl;
+		exit(2);
+	}
+	(*map)[ghost->y][ghost->x] = ghost->prev;
+	ghost->prev = (*map)[new_y][new_x];
+	(*map)[new_y][new_x] = 3;
+	ghost->x = new_x;
+	ghost->y = new_y;
+}
+
+void	move_ghosts(std::vector<std::vector<int> > *map, std::vector<sf::Sprite*> & ghosts, sf::Clock clockS, Pac *pacman, std::vector<Ghost*> ghosts_obj)
+{
+	float	sec;
+	int 	deltaX;
+	int 	deltaY;
+
+	sec = clockS.getElapsedTime().asMicroseconds();
+	clockS.restart();
+	sec = sec / 800;
+	for (int i = 0; i < ghosts.size(); i++)
+	{
+		deltaX = pacman->x - ghosts_obj[i]->x;
+		deltaY = pacman->y - ghosts_obj[i]->y;
+		if (deltaX == 0)
+			ghosts[i]->move(0, 0.7 * sec * (deltaY > 0 ? 1 : -1));
+		else if (deltaY == 0)
+			ghosts[i]->move(0.7 * sec * (deltaX > 0 ? 1 : -1), 0);
+		else if ((deltaX > 0 ? deltaX : deltaX * -1) > (deltaY > 0 ? deltaY : deltaY * -1) && deltaY != 0)
+			ghosts[i]->move(0, 0.7 * sec * (deltaY > 0 ? 1 : -1));
+		else if ((deltaX > 0 ? deltaX : deltaX * -1) < (deltaY > 0 ? deltaY : deltaY * -1) && deltaX != 0)
+			ghosts[i]->move(0.7 * sec * (deltaX > 0 ? 1 : -1), 0);
+		going_gh(ghosts_obj[i], map, ghosts[i]);
+	}
+}
+
 void	get_ghosts(std::vector<Ghost*> ghosts, std::vector<std::vector<int> > *map, std::vector<sf::Sprite*> & res, sf::Texture & tmp)
 {
 	int 						w;
@@ -48,7 +100,15 @@ void	going(Pac *pacman, std::vector<std::vector<int> > *map, sf::Sprite *pacman_
 	if ((*map)[new_y][new_x] == 5)
 		pacman->points++;
 	if ((*map)[new_y][new_x] == 4)
+	{
+		std::cout << "Pac-man found exit! You won with " << pacman->points << " points!" << std::endl;
 		exit(1);
+	}
+	if ((*map)[new_y][new_x] == 3)
+	{
+		std::cout << "Pac-man dead! You lose!" << std::endl;
+		exit(2);
+	}
 	(*map)[new_y][new_x] = 2;
 	(*map)[pacman->y][pacman->x] = 1;
 	pacman->x = new_x;
@@ -77,7 +137,6 @@ void	draw_pacman(std::vector<std::vector<int> > *map, Pac *pacman, sf::Sprite *p
 		}
 		pacman_sprite->setTextureRect(sf::IntRect(320 + (32 * (int)current), 0, 32, 32));
 		pacman_sprite->move(0.1 * sec, 0);
-		// std::cout << (pacman_sprite->getPosition()).x << std::endl;
 	}
 	else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || (sf::Keyboard::isKeyPressed(sf::Keyboard::A)))
 		&& (pacman->x != 0 && (*map)[pacman->y][pacman->x - 1] != 0))
@@ -258,6 +317,7 @@ void	go_viz(std::vector<std::vector<int> > *map, Pac *pacman, std::vector<Ghost*
 		window.clear();
 		draw_map(map, &window);
 		draw_pacman(map, pacman, &pacman_sprite, clockS, current, current2);
+		move_ghosts(map, gh_sprite, clockS, pacman, ghosts);
 		for (int i = 0; i < ghosts.size(); i++)
 			window.draw(*(gh_sprite[i]));
 		window.draw(door);
