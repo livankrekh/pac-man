@@ -11,9 +11,8 @@ int 	get_w(std::vector<std::vector<int> > *map)
 	return (740 / w);
 }
 
-void	get_ghosts(std::vector<Ghost*> ghosts, std::vector<std::vector<int> > *map, std::vector<sf::Sprite*> & res)
+void	get_ghosts(std::vector<Ghost*> ghosts, std::vector<std::vector<int> > *map, std::vector<sf::Sprite*> & res, sf::Texture & tmp)
 {
-	sf::Texture 				tmp;
 	int 						w;
 	int 						h;
 	char						path[2048];
@@ -21,7 +20,6 @@ void	get_ghosts(std::vector<Ghost*> ghosts, std::vector<std::vector<int> > *map,
 	h = 540 / map->size();
 	w = get_w(map);
 	res.reserve(ghosts.size());
-	tmp.loadFromFile(strcat(getcwd(path, 2048), "/src/img/all2.png"));
 	for (int i = 0; i < ghosts.size(); i++)
 	{
 		res.push_back(new sf::Sprite);
@@ -220,6 +218,7 @@ void	go_viz(std::vector<std::vector<int> > *map, Pac *pacman, std::vector<Ghost*
 	std::vector<sf::Sprite*>	gh_sprite;
 	sf::Texture 				tmp_door;
 	sf::Sprite 					door;
+	sf::Texture 				tmp_ghosts;
 	char						path[2048];
 
 	current = 0;
@@ -234,10 +233,11 @@ void	go_viz(std::vector<std::vector<int> > *map, Pac *pacman, std::vector<Ghost*
 	score = sf::Text("", font, 20);
 	score.setColor(sf::Color::Black);
 	score.setStyle(sf::Text::Bold | sf::Text::Underlined);
-	get_ghosts(ghosts, map, gh_sprite);
 	tmp_door.loadFromFile(strcat(getcwd(path, 2048), "/src/img/door.png"));
 	bzero(path, 2048);
+	tmp_ghosts.loadFromFile(strcat(getcwd(path, 2048), "/src/img/all.png"));
 	door.setTexture(tmp_door);
+	get_ghosts(ghosts, map, gh_sprite, tmp_ghosts);
 	for (int i = 0; i < map->size(); i++)
 	{
 		for (int j = 0; j < (*map)[i].size(); j++)
