@@ -19,8 +19,7 @@ public:
 	int		y;
 	int		points;
 
-	Pac(std::vector<std::vector<int> > map);
-	~Pac();
+			Pac(std::vector<std::vector<int> > map);
 	void	go_away(std::vector<std::vector<int> > & map, char flag);
 };
 
@@ -32,13 +31,16 @@ public:
 	int		id;
 	int		prev;
 
-	Ghost(int x0, int y0, int ide);
-	~Ghost();
+			Ghost(int x0, int y0, int ide);
 };
 
 char			**ft_strsplit(char const *s, char c);
 void			delete_split(char **split);
 int				split_size(char **split);
-void			vizualize(std::vector<std::vector<int> > *map, int gh);	
+void			vizualize(std::vector<std::vector<int> > *map, int gh);
+int 			get_w(std::vector<std::vector<int> > *map);
+void			get_ghosts(std::vector<Ghost*> ghosts, std::vector<std::vector<int> > *map, std::vector<sf::Sprite*> & res, sf::Texture & tmp);
+void			move_ghosts(std::vector<std::vector<int> > *map, std::vector<sf::Sprite*> & ghosts, sf::Clock clockS, Pac *pacman, std::vector<Ghost*> ghosts_obj);
+void			draw_pacman(std::vector<std::vector<int> > *map, Pac *pacman, sf::Sprite *pacman_sprite, sf::Clock & clockS, float & current, float & current2, std::vector<Ghost*> & ghosts);
 
 #endif

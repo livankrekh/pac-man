@@ -60,8 +60,3 @@ void	Pac::go_away(std::vector<std::vector<int> > & map, char flag)
 		this->points++;
 	map[this->y][this->x] = 2;
 }
-
-Pac::~Pac()
-{
-	std::cout << "Pac-man is dead :(" << std::endl;
-}

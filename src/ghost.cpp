@@ -7,8 +7,3 @@ Ghost::Ghost(int x0, int y0, int ide)
 	this->id = ide;
 	this->prev = 1;
 }
-
-Ghost::~Ghost()
-{
-	std::cout << "Ghost #" << this->id << " is dead :)" << std::endl;
-}

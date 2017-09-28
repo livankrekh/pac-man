@@ -58,28 +58,19 @@ int		main(int argc, char **argv)
 		file_map.open(argv[1]);
 		map.reserve(size_y);
 
-		for (int i = 0; !file_map.eof(); i++)
+		for (int i = 0; !file_map.eof() && strlen(buff); i++)
 		{
 			file_map.getline(buff, 2048);
 			tmp = ft_strsplit(buff, ' ');
 			map[i].reserve(split_size(tmp));
 			map.push_back(map[i]);
-
+			if (split_size(tmp) < 2)
+				break ;
 			for (int j = 0, size = split_size(tmp); j < size; j++)
 				map[i].push_back(atoi(tmp[j]));
 			delete_split(tmp);
 		}
 		tmp = NULL;
-	}
-	for (int k = 0; k < (int)map.size(); k++)
-	{
-		for (int l = 0; l < (int)map[k].size(); l++)
-		{
-			if (map[k][l] == 3)
-				gh++;
-			std::cout << map[k][l] << " ";
-		}
-		std::cout << std::endl;
 	}
 	vizualize(&map, gh);
 
