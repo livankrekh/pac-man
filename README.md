@@ -2,7 +2,7 @@
 
 Project use SFML C++ library and need to install this library!!! And project tested on Ubuntu 16.04 LTE!
 
-## Prepare installation
+## Installation SFML
 For SFML installation
 ```
 > ./SFML_autoInstall.sh
@@ -10,6 +10,14 @@ For SFML installation
 OR
 ```
 > ./SFML_install.sh
+```
+## Compile project
+```
+> make
+```
+## Run project
+```
+> ./pac-man map_file
 ```
 First argument of program is the path to the map.
 If program haven\`t the first argument, program include standart map
