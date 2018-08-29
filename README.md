@@ -4,13 +4,13 @@ Project use SFML C++ library and need to install this library!!! And project tes
 
 ## Prepare installation
 For SFML installation
-'''
-./SFML_autoInstall.sh
-'''
+```
+> ./SFML_autoInstall.sh
+```
 OR
-'''
+```
 > ./SFML_install.sh
-'''
+```
 First argument of program is the path to the map.
 If program haven\`t the first argument, program include standart map
 
