@@ -3,7 +3,7 @@
 Project use SFML C++ library and need to install this library!!! And project tested on Ubuntu 16.04 LTE!
 
 First argument of program is the path to the map.
-If program haven`t the first argument, program include standart map
+If program haven\`t the first argument, program include standart map
 
 Map is a text file with digits delimited by spaces and be new lines
 
