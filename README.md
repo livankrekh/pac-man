@@ -26,17 +26,17 @@ Map is a text file with digits delimited by spaces and be new lines
 
 Every digit symbolize a thing:
 
-0 - wall
+`0` - wall
 
-1 - space
+`1` - space
 
-2 - position of pac-man
+`2` - position of pac-man
 
-3 - position of ghosts
+`3` - position of ghosts
 
-4 - position of exit
+`4` - position of exit
 
-5 - points
+`5` - points
 
 Map must be without new lines at the end of file! Must be only one position of pac-man at the map!
 
